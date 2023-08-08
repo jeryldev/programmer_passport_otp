@@ -33,6 +33,11 @@ defmodule Calculator.Boundary.ServerTest do
     assert Server.state(server) == -state
   end
 
+  test "increment server state", %{server: server, state: state} do
+    assert Server.inc(server) == :ok
+    assert Server.state(server) == state + 1
+  end
+
   test "clear server state", %{server: server} do
     assert Server.clear(server) == :ok
     assert Server.state(server) == 0
