@@ -1,18 +1,23 @@
 defmodule Calculator do
-  @moduledoc """
-  Documentation for `Calculator`.
-  """
+  alias Calculator.Boundary.Boundary
 
-  @doc """
-  Hello world.
+  def start(initial_state) do
+    Boundary.start(initial_state)
+  end
 
-  ## Examples
+  def add(calculator, number), do: send(calculator, {:add, number})
+  def subtract(calculator, number), do: send(calculator, {:subtract, number})
+  def multiply(calculator, number), do: send(calculator, {:multiply, number})
+  def divide(calculator, number), do: send(calculator, {:divide, number})
+  def clear(calculator), do: send(calculator, {:clear})
 
-      iex> Calculator.hello()
-      :world
+  def state(calculator) do
+    send(calculator, {:state, self()})
 
-  """
-  def hello do
-    :world
+    receive do
+      {:state, state} -> state
+    after
+      5000 -> {:error, :timeout}
+    end
   end
 end
