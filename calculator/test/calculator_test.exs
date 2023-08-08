@@ -3,7 +3,7 @@ defmodule CalculatorTest do
   alias Calculator
 
   setup do
-    initial_state = 0
+    initial_state = 10
     server = Calculator.start(initial_state)
     {:ok, server: server, state: initial_state}
   end

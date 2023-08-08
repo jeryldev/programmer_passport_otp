@@ -3,7 +3,7 @@ defmodule Calculator.Boundary.ServerTest do
   alias Calculator.Boundary.Server
 
   setup do
-    initial_state = 0
+    initial_state = 10
     {:ok, server} = Server.start_link(initial_state)
     {:ok, server: server, state: initial_state}
   end

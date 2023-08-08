@@ -3,7 +3,7 @@ defmodule Calculator.Boundary.BoundaryTest do
   alias Calculator.Boundary.Boundary
 
   setup do
-    initial_state = 0
+    initial_state = 10
     pid = Boundary.start(initial_state)
     {:ok, pid: pid, state: initial_state}
   end
@@ -42,10 +42,9 @@ defmodule Calculator.Boundary.BoundaryTest do
 
   test "receive negate message", %{pid: pid} do
     :erlang.trace(pid, true, [:receive])
-    send(pid, {:negate, 1})
+    send(pid, {:negate})
 
-    assert_receive {:trace, ^pid, :receive, {:negate, value}}
-    assert value == -1
+    assert_receive {:trace, ^pid, :receive, {:negate}}
   end
 
   test "receive clear message", %{pid: pid} do
