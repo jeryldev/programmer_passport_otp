@@ -10,6 +10,8 @@ defmodule Calculator.Core do
       else: {:error, :undefined_function}
   end
 
+  def negate(acc), do: acc * -1
+
   defp function_exists?(function_ref) do
     function = Function.info(function_ref)[:name]
     function in [:add, :subtract, :multiply, :divide]
