@@ -28,6 +28,11 @@ defmodule Calculator.Boundary.ServerTest do
     assert Server.state(server) == state / 1
   end
 
+  test "negate server state", %{server: server, state: state} do
+    assert Server.negate(server) == :ok
+    assert Server.state(server) == -state
+  end
+
   test "clear server state", %{server: server} do
     assert Server.clear(server) == :ok
     assert Server.state(server) == 0

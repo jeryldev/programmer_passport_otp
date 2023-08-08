@@ -34,6 +34,10 @@ defmodule Calculator.CoreTest do
     assert Calculator.Core.fold([1, 2, 3], 1, &Core.divide/2) == 0.16666666666666666
   end
 
+  test "negate a number" do
+    assert Calculator.Core.negate(1) == -1
+  end
+
   test "return error when function is not defined in core when folding" do
     assert Calculator.Core.fold([1, 2, 3], 1, fn -> "undefined function" end) ==
              {:error, :undefined_function}

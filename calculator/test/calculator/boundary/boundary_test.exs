@@ -40,6 +40,14 @@ defmodule Calculator.Boundary.BoundaryTest do
     assert value == 1
   end
 
+  test "receive negate message", %{pid: pid} do
+    :erlang.trace(pid, true, [:receive])
+    send(pid, {:negate, 1})
+
+    assert_receive {:trace, ^pid, :receive, {:negate, value}}
+    assert value == -1
+  end
+
   test "receive clear message", %{pid: pid} do
     :erlang.trace(pid, true, [:receive])
     send(pid, {:clear})
