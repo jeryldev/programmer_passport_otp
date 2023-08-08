@@ -49,9 +49,9 @@ defmodule Calculator.Boundary.BoundaryTest do
 
   test "receive increment message", %{pid: pid} do
     :erlang.trace(pid, true, [:receive])
-    send(pid, {:increment})
+    send(pid, {:inc})
 
-    assert_receive {:trace, ^pid, :receive, {:increment}}
+    assert_receive {:trace, ^pid, :receive, {:inc}}
   end
 
   test "receive clear message", %{pid: pid} do

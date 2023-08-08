@@ -34,7 +34,7 @@ defmodule CalculatorTest do
   end
 
   test "increment calculator state", %{server: server, state: state} do
-    assert Calculator.inc(server) == :ok
+    assert Calculator.inc(server) == :inc
     assert Calculator.state(server) == state + 1
   end
 
