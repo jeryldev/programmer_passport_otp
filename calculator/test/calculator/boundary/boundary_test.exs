@@ -1,6 +1,6 @@
 defmodule Calculator.Boundary.BoundaryTest do
   use ExUnit.Case
-  alias Calculator.{Boundary.Boundary, Core}
+  alias Calculator.Boundary.Boundary
 
   setup do
     initial_state = 0
@@ -51,7 +51,7 @@ defmodule Calculator.Boundary.BoundaryTest do
     :erlang.trace(pid, true, [:receive])
     send(pid, {:state, self()})
 
-    assert_receive {:trace, ^pid, :receive, {:state, state}}
+    assert_receive {:trace, ^pid, :receive, {:state, _state}}
   end
 
   test "receive unexpected message", %{pid: pid} do

@@ -35,7 +35,7 @@ defmodule Calculator.CoreTest do
   end
 
   test "return error when function is not defined in core when folding" do
-    assert Calculator.Core.fold([1, 2, 3], 1, &Core.not_defined/2) ==
+    assert Calculator.Core.fold([1, 2, 3], 1, fn -> "undefined function" end) ==
              {:error, :undefined_function}
   end
 end
