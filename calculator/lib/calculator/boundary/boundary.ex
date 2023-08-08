@@ -1,9 +1,9 @@
 defmodule Calculator.Boundary.Boundary do
   alias Calculator.Core
 
-
   def start(initial_state) do
-    spawn(fn -> run(initial_state) end) # <--- init
+    # <--- init
+    spawn(fn -> run(initial_state) end)
   end
 
   def run(state) do
@@ -15,29 +15,31 @@ defmodule Calculator.Boundary.Boundary do
   def listen(state) do
     receive do
       {:add, number} ->
-        Core.add(state, number) # <--- handle_cast
+        # <--- handle_cast
+        Core.add(state, number)
 
       {:subtract, number} ->
-        Core.subtract(state, number) # <--- handle_cast
+        # <--- handle_cast
+        Core.subtract(state, number)
 
       {:multiply, number} ->
-        Core.multiply(state, number) # <--- handle_cast
+        # <--- handle_cast
+        Core.multiply(state, number)
 
       {:divide, number} ->
-        Core.divide(state, number) # <--- handle_cast
-
-      {:fold, list, acc, function} ->
-        Core.fold(list, acc, function) # <--- handle_cast
+        # <--- handle_cast
+        Core.divide(state, number)
 
       {:clear} ->
-        0 # <--- handle_cast
+        # <--- handle_cast
+        0
 
       {:state, pid} ->
-        send(pid, {:state, state}) # <--- handle_call
+        # <--- handle_call
+        send(pid, {:state, state})
         state
 
-      unexpected ->
-        IO.puts("Unexpected message: #{inspect(unexpected)}")
+      _unexpected ->
         listen(state)
     end
   end
