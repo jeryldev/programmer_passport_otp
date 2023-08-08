@@ -11,6 +11,7 @@ defmodule Calculator do
   def multiply(calculator, number), do: Server.multiply(calculator, number)
   def divide(calculator, number), do: Server.divide(calculator, number)
   def negate(calculator), do: Server.negate(calculator)
+  def inc(calculator), do: Server.inc(calculator)
   def clear(calculator), do: Server.clear(calculator)
   def state(calculator), do: Server.state(calculator)
 end
