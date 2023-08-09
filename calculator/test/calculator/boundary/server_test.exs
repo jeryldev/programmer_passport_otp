@@ -3,7 +3,7 @@ defmodule Calculator.Boundary.ServerTest do
   alias Calculator.Boundary.Server
 
   setup do
-    initial_state = 0
+    initial_state = 10
     {:ok, server} = Server.start_link(initial_state)
     {:ok, server: server, state: initial_state}
   end
@@ -26,6 +26,16 @@ defmodule Calculator.Boundary.ServerTest do
   test "divide server state by number", %{server: server, state: state} do
     assert Server.divide(server, 1) == :ok
     assert Server.state(server) == state / 1
+  end
+
+  test "negate server state", %{server: server, state: state} do
+    assert Server.negate(server) == :ok
+    assert Server.state(server) == -state
+  end
+
+  test "increment server state", %{server: server, state: state} do
+    assert Server.inc(server) == :inc
+    assert Server.state(server) == state + 1
   end
 
   test "clear server state", %{server: server} do

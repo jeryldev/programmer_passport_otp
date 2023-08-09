@@ -30,6 +30,10 @@ defmodule Calculator.Boundary.Server do
     {:noreply, Core.divide(state, number)}
   end
 
+  def handle_cast(:negate, state) do
+    {:noreply, Core.negate(state)}
+  end
+
   def handle_cast(:clear, _state) do
     {:noreply, 0}
   end
@@ -38,10 +42,16 @@ defmodule Calculator.Boundary.Server do
     {:reply, state, state}
   end
 
+  def handle_info(:inc, state) do
+    {:noreply, Core.inc(state)}
+  end
+
   def add(pid, number), do: GenServer.cast(pid, {:add, number})
   def subtract(pid, number), do: GenServer.cast(pid, {:subtract, number})
   def multiply(pid, number), do: GenServer.cast(pid, {:multiply, number})
   def divide(pid, number), do: GenServer.cast(pid, {:divide, number})
+  def inc(pid), do: send(pid, :inc)
+  def negate(pid), do: GenServer.cast(pid, :negate)
   def clear(pid), do: GenServer.cast(pid, :clear)
   def state(pid), do: GenServer.call(pid, :state)
 end

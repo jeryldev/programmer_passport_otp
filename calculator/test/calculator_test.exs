@@ -3,7 +3,7 @@ defmodule CalculatorTest do
   alias Calculator
 
   setup do
-    initial_state = 0
+    initial_state = 10
     server = Calculator.start(initial_state)
     {:ok, server: server, state: initial_state}
   end
@@ -26,6 +26,16 @@ defmodule CalculatorTest do
   test "divide calculator state by number", %{server: server, state: state} do
     assert Calculator.divide(server, 1) == :ok
     assert Calculator.state(server) == state / 1
+  end
+
+  test "negate calculator state", %{server: server, state: state} do
+    assert Calculator.negate(server) == :ok
+    assert Calculator.state(server) == -state
+  end
+
+  test "increment calculator state", %{server: server, state: state} do
+    assert Calculator.inc(server) == :inc
+    assert Calculator.state(server) == state + 1
   end
 
   test "clear calculator state", %{server: server} do

@@ -30,6 +30,14 @@ defmodule Calculator.Boundary.Boundary do
         # <--- handle_cast
         Core.divide(state, number)
 
+      {:negate} ->
+        # <--- handle_cast
+        Core.negate(state)
+
+      {:inc} ->
+        # <--- handle_info as an example only
+        Core.inc(state)
+
       {:clear} ->
         # <--- handle_cast
         0
