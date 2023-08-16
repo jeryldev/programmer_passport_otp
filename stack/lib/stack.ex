@@ -1,18 +1,12 @@
 defmodule Stack do
-  @moduledoc """
-  Documentation for `Stack`.
-  """
+  alias Stack.Boundary.Server
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Stack.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def start(initial_state \\ "") do
+    {:ok, server} = Server.start_link(initial_state)
+    server
   end
+
+  def push(server, item), do: Server.push(server, item)
+  def pop(server), do: Server.pop(server)
+  def state(server), do: Server.state(server)
 end
