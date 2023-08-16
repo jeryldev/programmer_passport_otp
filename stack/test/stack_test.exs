@@ -6,15 +6,15 @@ defmodule StackTest do
     initial_state = "apple"
     server = Stack.start(initial_state)
 
-    {:ok, server: server, state: initial_state}
+    {:ok, server: server}
   end
 
-  test "push", %{server: server, state: state} do
+  test "push", %{server: server} do
     Stack.push(server, "banana")
     assert Stack.state(server) == ["banana", "apple"]
   end
 
-  test "pop", %{server: server, state: state} do
+  test "pop", %{server: server} do
     Stack.push(server, "banana")
     Stack.push(server, "cherry")
     Stack.push(server, "date")
@@ -23,7 +23,7 @@ defmodule StackTest do
     assert Stack.state(server) == ["cherry", "banana", "apple"]
   end
 
-  test "state", %{server: server, state: state} do
+  test "state", %{server: server} do
     assert Stack.state(server) == ["apple"]
   end
 end
