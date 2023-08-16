@@ -9,6 +9,12 @@ defmodule StackTest do
     {:ok, server: server}
   end
 
+  test "start without initial state" do
+    server = Stack.start()
+    assert server
+    assert Stack.state(server) == []
+  end
+
   test "push", %{server: server} do
     Stack.push(server, "banana")
     assert Stack.state(server) == ["banana", "apple"]
