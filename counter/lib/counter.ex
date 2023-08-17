@@ -1,18 +1,8 @@
 defmodule Counter do
-  @moduledoc """
-  Documentation for `Counter`.
-  """
+  alias Counter.Boundary.Server
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Counter.hello()
-      :world
-
-  """
-  def hello do
-    :world
-  end
+  def start(counter \\ 0), do: Server.start_link(counter)
+  def increment(server), do: Server.increment(server)
+  def decrement(server), do: Server.decrement(server)
+  def state(server), do: Server.state(server)
 end
