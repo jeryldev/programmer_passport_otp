@@ -7,11 +7,6 @@ defmodule Counter.Boundary.ServerTest do
     {:ok, server: server}
   end
 
-  test "start server without initial state" do
-    {:ok, server} = Server.start_link()
-    assert server
-  end
-
   test "increment/1 increments the counter", %{server: server} do
     assert {:ok, 1} = Server.increment(server)
   end
@@ -28,5 +23,9 @@ defmodule Counter.Boundary.ServerTest do
   test "decrement/1 returns an error when the counter is not an integer" do
     {:ok, server} = Server.start_link(:foo)
     assert {:error, :invalid_number} = Server.decrement(server)
+  end
+
+  test "state/1 returns the current state of the counter", %{server: server} do
+    assert {:ok, 0} = Server.state(server)
   end
 end

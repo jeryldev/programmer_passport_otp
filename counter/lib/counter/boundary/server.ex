@@ -2,7 +2,7 @@ defmodule Counter.Boundary.Server do
   use GenServer
   alias Counter.Core
 
-  def start_link(counter \\ 0) do
+  def start_link(counter) do
     GenServer.start_link(__MODULE__, counter)
   end
 
@@ -16,6 +16,10 @@ defmodule Counter.Boundary.Server do
 
   def decrement(pid) do
     GenServer.call(pid, :decrement)
+  end
+
+  def state(pid) do
+    GenServer.call(pid, :state)
   end
 
   def handle_call(:increment, _from, counter) do
@@ -36,5 +40,9 @@ defmodule Counter.Boundary.Server do
       {:error, reason} ->
         {:reply, {:error, reason}, counter}
     end
+  end
+
+  def handle_call(:state, _from, counter) do
+    {:reply, {:ok, counter}, counter}
   end
 end
