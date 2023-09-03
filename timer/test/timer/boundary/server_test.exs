@@ -1,5 +1,5 @@
 defmodule Timer.Boundary.ServerTest do
-  use ExUnit.Case, async: true
+  use ExUnit.Case
   alias Timer.Boundary.Server
 
   test "start_link/0 starts the server" do

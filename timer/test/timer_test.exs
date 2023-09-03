@@ -1,5 +1,5 @@
 defmodule TimerTest do
-  use ExUnit.Case, async: true
+  use ExUnit.Case
   alias Timer
   alias Timer.Boundary.Server
 
@@ -10,7 +10,7 @@ defmodule TimerTest do
 
   test "reset/0 resets the timer" do
     assert {:ok, pid} = Timer.start()
-    IO.inspect(pid)
+    assert pid == Process.whereis(Server)
     assert :ok == Timer.reset()
   end
 end
